@@ -890,9 +890,18 @@ st.dataframe(datos)
 
 if st.button("📥 GENERAR EXCEL"):
 
+    archivo_excel = "ReporteEnergetico.xlsx"
+
     datos.to_excel(
-        "ReporteEnergetico.xlsx",
+        archivo_excel,
         index=False
     )
 
-    st.success("✅ Excel generado")
+    with open(archivo_excel, "rb") as file:
+
+        st.download_button(
+            label="⬇ Descargar Excel",
+            data=file,
+            file_name="ReporteEnergetico.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
